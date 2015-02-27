@@ -4,15 +4,14 @@
 program define filediff
 
 version 13.1
-syntax varlist using/, idvars(varlist)
-
+syntax varlist using/, idvars(varlist) [EPSilon(real 0.00001)]
 
 quietly {
 
 	tempfile originalmaster
 	save `originalmaster'
 
-	local eps = 0.00001
+	local eps = `epsilon'
 
 	* Check that idvars are ids
 	isid `idvars'
@@ -253,6 +252,8 @@ quietly {
 	noisily di _newline(1)
 	noisily di as result "Merge statistics"
 	noisily tab _merge
+	nois dis _n
+	nois di "Note: In variable comparisons, only observations where both master and using match on `idvars' are matched"
 
 }
 
