@@ -73,7 +73,7 @@ quietly {
 		}
 	}
 
-	order make _merge
+	order `idvars' _merge
 	foreach var of local varlist {
 		order `var'_master `var'_using, last
 	}
